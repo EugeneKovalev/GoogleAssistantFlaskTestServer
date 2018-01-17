@@ -44,7 +44,7 @@ def handle_google_assistant_request():
             ],
             "source": "testserver"
         })
-
+    
 
 if __name__ == '__main__':
     app.run()
