@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify, session
 
+from helpers import rename_issue, prioritize_issue
+
 app = Flask(__name__)
 
 
@@ -20,47 +22,12 @@ def handle_google_assistant_request():
     action = body['result']['action']
 
     if action == 'rename_issue':
-        if 'context-of-described-issue' in [_['name'] for _ in body['result']['contexts']]:
-            response_text = "Excellent! Now, add the description, please!"
-        else:
-            response_text = "Good job! Now, set a priority status of the issue!"
-
-        return jsonify({
-            "speech": response_text,
-            "displayText": str([_['name'] for _ in body['result']['contexts']]),#response_text,
-            "data": {},
-            "source": "testserver"
-        })
+        result = rename_issue(body['result']['contexts'])
+        return jsonify(result)
 
     elif action == 'prioritize_issue':
-        root_context = [_ for _ in body['result']['contexts'] if _['name'] == 'context-of-named-issue'][0]
-
-        response_text = "The name of the {0} issue is {1}. Described as {2}".format(
-            body['result']['parameters']['issue_priority'],
-            root_context['parameters']['issue_name'],
-            root_context['parameters']['issue_description']
-        )
-
-        return jsonify({
-            "speech": response_text,
-            "displayText": response_text,
-            "data": {},
-            "contextOut": [
-                {
-                    "name": "context-of-no-issues",
-                    "lifespan": 5
-                },
-                {
-                    "name": "context-of-named-issue",
-                    "lifespan": 0
-                },
-                {
-                    "name": "context-of-described-issue",
-                    "lifespan": 0
-                }
-            ],
-            "source": "testserver"
-        })
+        result = prioritize_issue(body['result']['contexts'])
+        return jsonify(result)
 
 
 if __name__ == '__main__':
