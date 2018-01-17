@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def handle_google_assistant_request():
+def hello_world():
     return "Hello world"
 
 
