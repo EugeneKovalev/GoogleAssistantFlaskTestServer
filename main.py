@@ -27,7 +27,7 @@ def handle_google_assistant_request():
 
         return jsonify({
             "speech": response_text,
-            "displayText": response_text,
+            "displayText": str([_['name'] for _ in body['result']['contexts']]),#response_text,
             "data": {},
             "source": "testserver"
         })
