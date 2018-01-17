@@ -1,4 +1,8 @@
 
+def greet_user():
+    pass
+
+
 def rename_issue(contexts):
     if 'context-of-described-issue' in (_['name'] for _ in contexts):
         response_text = "Good job! Now, set a priority status of the issue!"

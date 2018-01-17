@@ -21,7 +21,10 @@ def handle_google_assistant_request():
     body = request.json
     action = body['result']['action']
 
-    if action == 'rename_issue':
+    if action == 'greet_user':
+        return jsonify({})
+
+    elif action == 'rename_issue':
         result = rename_issue(body['result']['contexts'])
         return jsonify(result)
 
