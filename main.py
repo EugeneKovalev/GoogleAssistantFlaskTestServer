@@ -20,7 +20,7 @@ def handle_google_assistant_request():
     action = body['result']['action']
 
     if action == 'rename_issue':
-        if 'context-of-described-issue' in (_['name'] for _ in body['result']['contexts']):
+        if 'context-of-described-issue' in [_['name'] for _ in body['result']['contexts']]:
             response_text = "Excellent! Now, add the description, please!"
         else:
             response_text = "Good job! Now, set a priority status of the issue!"
