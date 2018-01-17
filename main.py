@@ -16,8 +16,8 @@ def handle_google_assistant_request():
     if action == 'prioritize_issue':
         name = ''
         description = ''
-        priority = body['parameters']['issue_priority']
-        for context in body['contexts']:
+        priority = body['result']['parameters']['issue_priority']
+        for context in body['result']['contexts']:
             if context['name'] == 'context-of-named-issue':
                 name = context['parameters']['name']
             elif context['name'] == 'context-of-described-issue':
