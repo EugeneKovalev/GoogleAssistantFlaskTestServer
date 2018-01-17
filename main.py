@@ -28,7 +28,12 @@ def handle_google_assistant_request():
                 priority, name, description
             ),
             "data": {},
-            "contextOut": body['result']['contexts'],
+            "contextOut": [
+              {
+                "name": "context-of-no-issues",
+                "lifespan": 5
+              }
+            ],
             "source": "testserver"
         })
 
