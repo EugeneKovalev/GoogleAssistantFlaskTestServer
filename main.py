@@ -41,6 +41,13 @@ def handle_google_assistant_request():
             }}
         })
 
+    elif action == 'greet_user_fallback':
+        print(1)
+        return jsonify({
+            'test': "Hello! This is Service Desk App! How can I help?",
+            'speech': "Hello! This is Service Desk App! How can I help?"
+        })
+
     elif action == 'rename_issue':
         result = rename_issue(body['result']['contexts'])
         return jsonify(result)
