@@ -19,20 +19,31 @@ def handle_google_assistant_request():
     body = request.json
     action = body['result']['action']
 
-    if action == 'prioritize_issue':
-        root_context = [_ for _ in body['result']['contexts'] if _['name'] == 'context-of-named-issue'][0]
-
-        name = root_context['parameters']['issue_name']
-        description = root_context['parameters']['issue_description']
-        priority = body['result']['parameters']['issue_priority']
+    if action == 'rename_issue':
+        if 'context-of-described-issue' in (_['name'] for _ in body['result']['contexts']):
+            response_text = "Excellent! Now, add the description, please!"
+        else:
+            response_text = "Good job! Now, set a priority status of the issue!"
 
         return jsonify({
-            "speech": "The name of the {0} issue is {1}. Described as {2}".format(
-                priority, name, description
-            ),
-            "displayText": "The name of the {0} issue is {1}. Described as {2}".format(
-                priority, name, description
-            ),
+            "speech": response_text,
+            "displayText": response_text,
+            "data": {},
+            "source": "testserver"
+        })
+
+    elif action == 'prioritize_issue':
+        root_context = [_ for _ in body['result']['contexts'] if _['name'] == 'context-of-named-issue'][0]
+
+        response_text = "The name of the {0} issue is {1}. Described as {2}".format(
+            body['result']['parameters']['issue_priority'],
+            root_context['parameters']['issue_name'],
+            root_context['parameters']['issue_description']
+        )
+
+        return jsonify({
+            "speech": response_text,
+            "displayText": response_text,
             "data": {},
             "contextOut": [
                 {
