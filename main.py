@@ -22,7 +22,24 @@ def handle_google_assistant_request():
     action = body['result']['action']
 
     if action == 'greet_user':
-        return jsonify({})
+        return jsonify({
+            'data': {"google": {
+                "expectUserResponse": True,
+                "isSsml": False,
+                "noInputPrompts": [],
+                "systemIntent": {
+                    "intent": "actions.intent.PERMISSION",
+                    "data": {
+                        "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+                        "optContext": "To pick you up",
+                        "permissions": [
+                            "NAME",
+                            "DEVICE_PRECISE_LOCATION"
+                        ]
+                    }
+                }
+            }}
+        })
 
     elif action == 'rename_issue':
         result = rename_issue(body['result']['contexts'])
