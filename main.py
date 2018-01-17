@@ -29,10 +29,18 @@ def handle_google_assistant_request():
             ),
             "data": {},
             "contextOut": [
-              {
-                "name": "context-of-no-issues",
-                "lifespan": 5
-              }
+                {
+                    "name": "context-of-no-issues",
+                    "lifespan": 5
+                },
+                {
+                    "name": "context-of-named-issue",
+                    "lifespan": 0
+                },
+                {
+                    "name": "context-of-described-issue",
+                    "lifespan": 0
+                }
             ],
             "source": "testserver"
         })
