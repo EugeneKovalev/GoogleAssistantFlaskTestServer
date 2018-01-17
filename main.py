@@ -3,6 +3,11 @@ from flask import Flask, request, jsonify, session
 app = Flask(__name__)
 
 
+@app.route('/')
+def handle_google_assistant_request():
+    return "Hello world"
+
+
 @app.route('/api/handle-google-assistant-request', methods=['GET', 'POST'])
 def handle_google_assistant_request():
     body = request.json
