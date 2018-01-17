@@ -19,9 +19,9 @@ def handle_google_assistant_request():
         priority = body['result']['parameters']['issue_priority']
         for context in body['result']['contexts']:
             if context['name'] == 'context-of-named-issue':
-                name = context['parameters']['name']
+                name = context['parameters']['issue_name']
             elif context['name'] == 'context-of-described-issue':
-                name = context['parameters']['description']
+                name = context['parameters']['issue_description']
 
         return jsonify({
             "speech": "The name of the {0} issue is {1}. Described as {2}".format(
