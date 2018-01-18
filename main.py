@@ -61,8 +61,19 @@ def handle_google_assistant_request():
     if action == 'greet_user':
 
         return jsonify({
-            "intent": "actions.intent.SIGN_IN",
-            "inputValueData": {}
+            'data':
+                {
+                    "google": {
+                        "expectUserResponse": True,
+                        "systemIntent": {
+                            "intent": "actions.intent.SIGN_IN",
+                            "data": {
+                                "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+                                "inputValueData": {}
+                            }
+                        }
+                    }
+                }
         })
 
 
