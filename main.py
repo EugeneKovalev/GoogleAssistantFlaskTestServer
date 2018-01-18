@@ -62,67 +62,33 @@ def handle_google_assistant_request():
 
         # return jsonify()
 
-        # {
-        #     "conversationToken": "{\"state\":null,\"data\":{}}",
-        #     "expectUserResponse": True,
-        #     "expectedInputs": [
-        #         {
-        #             "inputPrompt": {
-        #                 "initialPrompts": [
-        #                     {
-        #                         "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
-        #                     }
-        #                 ],
-        #                 "noInputPrompts": []
-        #             },
-        #             "possibleIntents": [
-        #                 {
-        #                     "intent": "actions.intent.SIGN_IN",
-        #                     "inputValueData": {}
-        #                 }
-        #             ]
-        #         }
-        #     ]
-        # }
-
-
-
-
         return jsonify({
             'displayText': "Hello! This",
             'speech': "Hello! This is th",
-            'data':
-                {
-                    "google": {
-                        "expectUserResponse": True,
-                        "expectedInputs": [
-                            {
-                                "inputPrompt": {
-                                    "initialPrompts": [
-                                        {
-                                            "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
-                                        }
-                                    ],
-                                    "noInputPrompts": []
-                                },
-                                "possibleIntents": [
+            'data': {
+                "google": {
+                    "conversationToken": "{\"state\":null,\"data\":{}}",
+                    "expectUserResponse": True,
+                    "expectedInputs": [
+                        {
+                            "inputPrompt": {
+                                "initialPrompts": [
                                     {
-                                        "intent": "actions.intent.SIGN_IN",
-                                        "inputValueData": {}
+                                        "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
                                     }
-                                ]
-                            }
-                        ]
-                        # "systemIntent": {
-                        #     "intent": "actions.intent.SIGN_IN",
-                        #     "inputValueData": {}
-                        #     # "data": {
-                        #     #     "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                        #     #
-                        #     # }
-                        # }
-                    }
+                                ],
+                                "noInputPrompts": []
+                            },
+                            "possibleIntents": [
+                                {
+                                    "intent": "actions.intent.SIGN_IN",
+                                    "inputValueData": {}
+                                }
+                            ]
+                        }
+                    ]
                 }
+            }
         })
 
 
