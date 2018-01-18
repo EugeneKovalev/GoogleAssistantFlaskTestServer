@@ -92,28 +92,7 @@ def handle_google_assistant_request():
         })
 
 
-        # return jsonify({
-        #     'displayText': "Hello! This is the Service Desk App! Do you agree to provide your device and profile data?",
-        #     'speech': "Hello! This is the Service Desk App! Do you agree to provide your device and profile data?",
-        #     'data':
-        #         {
-        #             "google": {
-        #                 "expectUserResponse": True,
-        #                 "isSsml": False,
-        #                 "noInputPrompts": [],
-        #                 "systemIntent": {
-        #                     "intent": "actions.intent.PERMISSION",
-        #                     "data": {
-        #                         "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-        #                         "permissions": [
-        #                             "NAME",
-        #                             "DEVICE_COARSE_LOCATION",
-        #                             "DEVICE_PRECISE_LOCATION"
-        #                         ]
-        #                     }
-        #                 }
-        #             }}
-        # })
+
 
 
 
