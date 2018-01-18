@@ -60,35 +60,39 @@ def handle_google_assistant_request():
 
     if action == 'greet_user':
 
-        return jsonify({
-            "conversationToken": "{\"state\":null,\"data\":{}}",
-            "expectUserResponse": True,
-            "expectedInputs": [
-                {
-                    "inputPrompt": {
-                        "initialPrompts": [
-                            {
-                                "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
-                            }
-                        ],
-                        "noInputPrompts": []
-                    },
-                    "possibleIntents": [
-                        {
-                            "intent": "actions.intent.SIGN_IN",
-                            "inputValueData": {}
-                        }
-                    ]
-                }
-            ]
-        })
+        # return jsonify()
+
+        # {
+        #     "conversationToken": "{\"state\":null,\"data\":{}}",
+        #     "expectUserResponse": True,
+        #     "expectedInputs": [
+        #         {
+        #             "inputPrompt": {
+        #                 "initialPrompts": [
+        #                     {
+        #                         "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
+        #                     }
+        #                 ],
+        #                 "noInputPrompts": []
+        #             },
+        #             "possibleIntents": [
+        #                 {
+        #                     "intent": "actions.intent.SIGN_IN",
+        #                     "inputValueData": {}
+        #                 }
+        #             ]
+        #         }
+        #     ]
+        # }
+
+
 
 
         return jsonify({
+            'displayText': "Hello! This",
+            'speech': "Hello! This is th",
             'data':
                 {
-                    'displayText': "Hello! This",
-                    'speech': "Hello! This is th",
                     "google": {
                         "expectUserResponse": True,
                         "expectedInputs": [
