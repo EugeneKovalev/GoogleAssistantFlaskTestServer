@@ -61,6 +61,30 @@ def handle_google_assistant_request():
     if action == 'greet_user':
 
         return jsonify({
+            "conversationToken": "{\"state\":null,\"data\":{}}",
+            "expectUserResponse": True,
+            "expectedInputs": [
+                {
+                    "inputPrompt": {
+                        "initialPrompts": [
+                            {
+                                "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
+                            }
+                        ],
+                        "noInputPrompts": []
+                    },
+                    "possibleIntents": [
+                        {
+                            "intent": "actions.intent.SIGN_IN",
+                            "inputValueData": {}
+                        }
+                    ]
+                }
+            ]
+        })
+
+
+        return jsonify({
             'data':
                 {
                     'displayText': "Hello! This",
