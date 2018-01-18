@@ -1,8 +1,18 @@
-from flask import Flask, request, jsonify, session
+import uuid
+
+import requests
+from flask import Flask, request, jsonify, session, redirect
 
 from helpers import rename_issue, prioritize_issue
 
 app = Flask(__name__)
+
+ESPRESSO_AUTH_URL = 'https://espressoemulator.herokuapp.com/o/login/google-oauth2'
+GA_REDIRECT_ENDPOINT = 'https://oauth-redirect.googleusercontent.com/r/servicedesktest-4c7b8'
+# ESPRESSO_GOOGLE_CLIENT_ID = 'ESPRESSO_GENERATED_VALUE'
+GA_GOOGLE_CLIENT_ID = '106465978261-3it16mqdn461c7okp8ioftcebfan812m.apps.googleusercontent.com'
+# implement oauth
+# generate access token
 
 
 @app.route('/')
@@ -14,6 +24,32 @@ def hello_world():
         src="https://console.dialogflow.com/api-client/demo/embedded/ffae5553-95ff-4ef5-b4e3-a7b6bcb5f0f5">
     </iframe>
     """
+
+@app.route('/api')
+def get_access_token():
+    state = str(uuid.uuid4())
+
+    espresso_auth_url = '{0}/?client_id={1}&redirect_uri={2}&state={3}&response_type=token'.format(
+        ESPRESSO_AUTH_URL, GA_GOOGLE_CLIENT_ID, GA_REDIRECT_ENDPOINT, state
+    )
+
+    response = requests.post(espresso_auth_url)
+
+    # generate access token for an espresso user
+    access_token = uuid.uuid4()
+
+    # # this will be on espresso
+    # return redirect('{0}#access_token={1}&token_type=bearer&state={2}'.format(
+    #     ESPRESSO_REDIRECT_ENDPOINT, access_token, state
+    # ))
+
+
+    # response = requests.post(settings.TINKOFF_ENDPOINT + 'GetState', json={
+    #     'TerminalKey': settings.TINKOFF_TERMINAL_KEY,
+    #     'PaymentId': transaction_id,
+    #     'Token': hash_value,
+    # }
+
 
 
 @app.route('/api/handle-google-assistant-request', methods=['GET', 'POST'])
@@ -31,9 +67,10 @@ def handle_google_assistant_request():
                     "intent": "actions.intent.PERMISSION",
                     "data": {
                         "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                        "optContext": "To pick you up",
+                        "optContext": "For convenience",
                         "permissions": [
                             "NAME",
+                            "DEVICE_COARSE_LOCATION",
                             "DEVICE_PRECISE_LOCATION"
                         ]
                     }
@@ -42,7 +79,6 @@ def handle_google_assistant_request():
         })
 
     elif action == 'greet_user_fallback':
-        print(1)
         return jsonify({
             'test': "Hello! This is Service Desk App! How can I help?",
             'speech': "Hello! This is Service Desk App! How can I help?"
