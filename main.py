@@ -3,7 +3,7 @@ import uuid
 import requests
 from flask import Flask, request, jsonify, session, redirect
 
-from helpers import rename_issue, prioritize_issue, get_greetings
+from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions
 
 app = Flask(__name__)
 
@@ -60,36 +60,36 @@ def handle_google_assistant_request():
 
     if action == 'greet_user':
 
-        # return jsonify()
+        return jsonify(get_permissions())
 
-        return jsonify({
-            'displayText': "Hello! This",
-            'speech': "Hello! This is th",
-            'data': {
-                "google": {
-                    "conversationToken": "{\"state\":null,\"data\":{}}",
-                    "expectUserResponse": True,
-                    "expectedInputs": [
-                        {
-                            "inputPrompt": {
-                                "initialPrompts": [
-                                    {
-                                        "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
-                                    }
-                                ],
-                                "noInputPrompts": []
-                            },
-                            "possibleIntents": [
-                                {
-                                    "intent": "actions.intent.SIGN_IN",
-                                    "inputValueData": {}
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        })
+        # return jsonify({
+        #     'displayText': "Hello! This",
+        #     'speech': "Hello! This is th",
+        #     'data': {
+        #         "google": {
+        #             "conversationToken": "{\"state\":null,\"data\":{}}",
+        #             "expectUserResponse": True,
+        #             "expectedInputs": [
+        #                 {
+        #                     "inputPrompt": {
+        #                         "initialPrompts": [
+        #                             {
+        #                                 "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
+        #                             }
+        #                         ],
+        #                         "noInputPrompts": []
+        #                     },
+        #                     "possibleIntents": [
+        #                         {
+        #                             "intent": "actions.intent.SIGN_IN",
+        #                             "inputValueData": {}
+        #                         }
+        #                     ]
+        #                 }
+        #             ]
+        #         }
+        #     }
+        # })
 
 
 
