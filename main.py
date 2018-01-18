@@ -67,14 +67,32 @@ def handle_google_assistant_request():
                     'speech': "Hello! This is th",
                     "google": {
                         "expectUserResponse": True,
-                        "systemIntent": {
-                            "intent": "actions.intent.SIGN_IN",
-                            "inputValueData": {}
-                            # "data": {
-                            #     "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                            #
-                            # }
-                        }
+                        "expectedInputs": [
+                            {
+                                "inputPrompt": {
+                                    "initialPrompts": [
+                                        {
+                                            "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
+                                        }
+                                    ],
+                                    "noInputPrompts": []
+                                },
+                                "possibleIntents": [
+                                    {
+                                        "intent": "actions.intent.SIGN_IN",
+                                        "inputValueData": {}
+                                    }
+                                ]
+                            }
+                        ]
+                        # "systemIntent": {
+                        #     "intent": "actions.intent.SIGN_IN",
+                        #     "inputValueData": {}
+                        #     # "data": {
+                        #     #     "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+                        #     #
+                        #     # }
+                        # }
                     }
                 }
         })
