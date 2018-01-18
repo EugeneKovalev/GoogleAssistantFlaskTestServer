@@ -61,29 +61,39 @@ def handle_google_assistant_request():
 
     if action == 'greet_user':
         return jsonify({
-            'data': {"google": {
-                "expectUserResponse": True,
-                "isSsml": False,
-                "noInputPrompts": [],
-                "systemIntent": {
-                    "intent": "actions.intent.PERMISSION",
-                    "data": {
-                        "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                        "optContext": "For convenience",
-                        "permissions": [
-                            "NAME",
-                            "DEVICE_COARSE_LOCATION",
-                            "DEVICE_PRECISE_LOCATION"
-                        ]
-                    }
-                }
-            }}
+            'displayText': "Hello! This is the Service Desk App! Do you agree to provide your device and profile data?",
+            'speech': "Hello! This is the Service Desk App! Do you agree to provide your device and profile data?",
+            'data':
+                {
+                    "google": {
+                        "expectUserResponse": True,
+                        "isSsml": False,
+                        "noInputPrompts": [],
+                        "systemIntent": {
+                            "intent": "actions.intent.PERMISSION",
+                            "data": {
+                                "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+                                # "optContext": "For convenience",
+                                "permissions": [
+                                    "NAME",
+                                    "DEVICE_COARSE_LOCATION",
+                                    "DEVICE_PRECISE_LOCATION"
+                                ]
+                            }
+                        }
+                    }}
         })
 
     elif action == 'greet_user_fallback':
+        # get_greetings()
+        if body.get('originalRequest', {}).get('data', {}).get('user', {}).get('profile'):
+            response_text = 'Yay! Welcome, sir!'
+        else:
+            response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
+
         return jsonify({
-            'test': "Hello! This is Service Desk App! How can I help?",
-            'speech': "Hello! This is Service Desk App! How can I help?"
+            'displayText': response_text,
+            'speech': response_text
         })
 
     elif action == 'rename_issue':

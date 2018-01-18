@@ -1,4 +1,7 @@
 
+def get_permissions():
+    pass
+
 def greet_user():
     pass
 
