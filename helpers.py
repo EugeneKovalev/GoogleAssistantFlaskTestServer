@@ -2,8 +2,28 @@
 def get_permissions():
     pass
 
-def greet_user():
-    pass
+
+def get_greetings(original_request):
+    if original_request.get('data', {}).get('user', {}).get('profile'):
+        response_text = 'Yay! Welcome, sir!'
+        return {
+            'displayText': response_text,
+            'speech': response_text
+        }
+    else:
+        response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
+
+        return {
+            'displayText': response_text,
+            'speech': response_text,
+            "data": {
+                "google": {
+                    "expect_user_response": False,
+                    "is_ssml": False,
+                    "no_input_prompts": []
+                }
+            }
+        }
 
 
 def rename_issue(contexts):

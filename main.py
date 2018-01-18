@@ -3,7 +3,7 @@ import uuid
 import requests
 from flask import Flask, request, jsonify, session, redirect
 
-from helpers import rename_issue, prioritize_issue
+from helpers import rename_issue, prioritize_issue, get_greetings
 
 app = Flask(__name__)
 
@@ -73,7 +73,6 @@ def handle_google_assistant_request():
                             "intent": "actions.intent.PERMISSION",
                             "data": {
                                 "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                                # "optContext": "For convenience",
                                 "permissions": [
                                     "NAME",
                                     "DEVICE_COARSE_LOCATION",
@@ -85,16 +84,8 @@ def handle_google_assistant_request():
         })
 
     elif action == 'greet_user_fallback':
-        # get_greetings()
-        if body.get('originalRequest', {}).get('data', {}).get('user', {}).get('profile'):
-            response_text = 'Yay! Welcome, sir!'
-        else:
-            response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
-
-        return jsonify({
-            'displayText': response_text,
-            'speech': response_text
-        })
+        result = get_greetings(body.get('originalRequest', {}))
+        return jsonify(result)
 
     elif action == 'rename_issue':
         result = rename_issue(body['result']['contexts'])
