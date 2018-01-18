@@ -29,14 +29,16 @@ def hello_world():
 def get_access_token():
     state = str(uuid.uuid4())
 
-    espresso_auth_url = '{0}/?client_id={1}&redirect_uri={2}&state={3}&response_type=token'.format(
+    espresso_auth_url = '{0}?client_id={1}&redirect_uri={2}&state={3}&response_type=token'.format(
         ESPRESSO_AUTH_URL, GA_GOOGLE_CLIENT_ID, GA_REDIRECT_ENDPOINT, state
     )
 
-    response = requests.post(espresso_auth_url)
+    return redirect(espresso_auth_url)
+
+    # response = requests.post(espresso_auth_url)
 
     # generate access token for an espresso user
-    access_token = uuid.uuid4()
+    # access_token = uuid.uuid4()
 
     # # this will be on espresso
     # return redirect('{0}#access_token={1}&token_type=bearer&state={2}'.format(
