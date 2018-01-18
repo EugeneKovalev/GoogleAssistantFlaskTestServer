@@ -63,14 +63,17 @@ def handle_google_assistant_request():
         return jsonify({
             'data':
                 {
+                    'displayText': "Hello! This",
+                    'speech': "Hello! This is th",
                     "google": {
                         "expectUserResponse": True,
                         "systemIntent": {
                             "intent": "actions.intent.SIGN_IN",
-                            "data": {
-                                "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
-                                "inputValueData": {}
-                            }
+                            "inputValueData": {}
+                            # "data": {
+                            #     "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+                            #
+                            # }
                         }
                     }
                 }
