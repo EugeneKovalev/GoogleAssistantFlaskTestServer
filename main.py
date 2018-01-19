@@ -58,8 +58,7 @@ def handle_google_assistant_request():
     body = request.json
     action = body['result']['action']
 
-    if action == 'greet_user':
-
+    if action == 'get_permissions':
         return jsonify(get_permissions())
 
         # return jsonify({
@@ -91,12 +90,7 @@ def handle_google_assistant_request():
         #     }
         # })
 
-
-
-
-
-
-    elif action == 'greet_user_fallback':
+    elif action == 'greet_user':
         result = get_greetings(body.get('originalRequest', {}))
         return jsonify(result)
 
