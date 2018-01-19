@@ -27,6 +27,10 @@ def get_permissions():
 
 
 def get_greetings(original_request):
+    return {
+        'displayText': 'qwert',
+        'speech': 'qwertyt'
+    }
     if original_request.get('data', {}).get('user', {}).get('profile'):
         response_text = 'Yay! Welcome, sir!'
         return {
