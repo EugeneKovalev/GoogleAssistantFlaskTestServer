@@ -120,7 +120,7 @@ def handle_google_assistant_request():
 
     elif action == 'add_priority_stepless_issue':
         result = add_priority_stepless_issue(body['result']['contexts'])
-        jsonify(result)
+        return jsonify(result)
 
     elif action == 'accept_description_adding_for_stepless_issue':
         result = accept_description_adding_for_stepless_issue(body['result']['contexts'])
