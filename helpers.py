@@ -50,10 +50,18 @@ def get_greetings(original_request):
 
 
 def rename_issue(contexts):
-    if 'context-of-described-issue' in (_['name'] for _ in contexts):
-        response_text = "Good job! Now, set a priority status of the issue!"
+    issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
+
+    if 'issue_priority' in  issue_context['parameters']:
+        response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
+            issue_context['parameters']['issue_priority'],
+            issue_context['parameters']['issue_name'],
+            issue_context['parameters']['issue_description']
+        )
+    elif 'issue_description' in issue_context['parameters']:
+        response_text = 'Good job! Now, set a priority status of the issue!'
     else:
-        response_text = "Excellent! Now, add the description, please!"
+        response_text = 'Excellent! Now, add the description, please!'
 
     return {
         "speech": response_text,
@@ -64,7 +72,23 @@ def rename_issue(contexts):
 
 
 def redescribe_issue(contexts):
-    pass
+    issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
+
+    if 'issue_priority' in issue_context['parameters']:
+        response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
+            issue_context['parameters']['issue_priority'],
+            issue_context['parameters']['issue_name'],
+            issue_context['parameters']['issue_description']
+        )
+    else:
+        response_text = 'Good job! Now, set a priority status of the issue!'
+
+    return {
+        "speech": response_text,
+        "displayText": response_text,
+        "data": {},
+        "source": "testserver"
+    }
 
 
 def prioritize_issue(contexts):
