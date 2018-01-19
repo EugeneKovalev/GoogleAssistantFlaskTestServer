@@ -119,15 +119,16 @@ def handle_google_assistant_request():
         return jsonify(result)
 
     elif action == 'accept_description_adding_for_stepless_issue':
-        accept_description_adding_for_stepless_issue(body['result']['contexts'])
+        result = accept_description_adding_for_stepless_issue(body['result']['contexts'])
+        return jsonify(result)
 
     elif action == 'add_description_for_stepless_issue':
-        add_description_for_stepless_issue(body['result']['contexts'])
+        result = add_description_for_stepless_issue(body['result']['contexts'])
+        return jsonify(result)
 
     elif action == 'deny_description_adding_for_stepless_issue':
-        deny_description_adding_for_stepless_issue(body['result']['contexts'])
-
-
+        result = deny_description_adding_for_stepless_issue(body['result']['contexts'])
+        return jsonify(result)
 
 
 if __name__ == '__main__':
