@@ -52,13 +52,13 @@ def get_greetings(original_request):
 def rename_issue(contexts):
     issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
-    if 'issue_priority' in  issue_context['parameters']:
+    if issue_context['parameters'].get('issue_priority'):
         response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
             issue_context['parameters']['issue_priority'],
             issue_context['parameters']['issue_name'],
             issue_context['parameters']['issue_description']
         )
-    elif 'issue_description' in issue_context['parameters']:
+    elif issue_context['parameters'].get('issue_description'):
         response_text = 'Good job! Now, set a priority status of the issue!'
     else:
         response_text = 'Excellent! Now, add the description, please!'
@@ -74,7 +74,7 @@ def rename_issue(contexts):
 def redescribe_issue(contexts):
     issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
-    if 'issue_priority' in issue_context['parameters']:
+    if issue_context['parameters'].get('issue_priority'):
         response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
             issue_context['parameters']['issue_priority'],
             issue_context['parameters']['issue_name'],
@@ -92,31 +92,60 @@ def redescribe_issue(contexts):
 
 
 def prioritize_issue(contexts):
-    root_context = [_ for _ in contexts if _['name'] == 'context-of-named-issue'][0]
+    issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
-    response_text = "The name of the {0} issue is {1}. Described as {2}".format(
-        root_context['parameters']['issue_priority'],
-        root_context['parameters']['issue_name'],
-        root_context['parameters']['issue_description']
+    response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
+        issue_context['parameters']['issue_priority'],
+        issue_context['parameters']['issue_name'],
+        issue_context['parameters']['issue_description']
     )
 
     return {
         "speech": response_text,
         "displayText": response_text,
         "data": {},
-        "contextOut": [
-            {
-                "name": "context-of-no-issues",
-                "lifespan": 5
-            },
-            {
-                "name": "context-of-named-issue",
-                "lifespan": 0
-            },
-            {
-                "name": "context-of-described-issue",
-                "lifespan": 0
+        # "contextOut": [
+        #     {
+        #         "name": "context-of-no-issues",
+        #         "lifespan": 5
+        #     },
+        #     {
+        #         "name": "context-of-named-issue",
+        #         "lifespan": 0
+        #     },
+        #     {
+        #         "name": "context-of-described-issue",
+        #         "lifespan": 0
+        #     }
+        # ],
+        "source": "testserver"
+    }
+
+
+def send_issue(contexts):
+    return {
+        "speech": 'Your issue has been sent! Good bye!',
+        "displayText": 'Your issue has been sent! Good bye!',
+        "data": {
+            "google": {
+                "expect_user_response": False,
+                "is_ssml": False,
+                "no_input_prompts": []
             }
-        ],
+        },
+        # "contextOut": [
+        #     {
+        #         "name": "context-of-no-issues",
+        #         "lifespan": 5
+        #     },
+        #     {
+        #         "name": "context-of-named-issue",
+        #         "lifespan": 0
+        #     },
+        #     {
+        #         "name": "context-of-described-issue",
+        #         "lifespan": 0
+        #     }
+        # ],
         "source": "testserver"
     }
