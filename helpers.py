@@ -1,3 +1,5 @@
+import json
+
 
 def get_permissions():
     return {
@@ -59,6 +61,10 @@ def rename_issue(contexts):
         "data": {},
         "source": "testserver"
     }
+
+
+def redescribe_issue(contexts):
+    pass
 
 
 def prioritize_issue(contexts):

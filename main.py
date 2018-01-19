@@ -1,9 +1,10 @@
+import json
 import uuid
 
 import requests
 from flask import Flask, request, jsonify, session, redirect
 
-from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions
+from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue
 
 app = Flask(__name__)
 
@@ -24,6 +25,7 @@ def hello_world():
         src="https://console.dialogflow.com/api-client/demo/embedded/ffae5553-95ff-4ef5-b4e3-a7b6bcb5f0f5">
     </iframe>
     """
+
 
 @app.route('/api')
 def get_access_token():
@@ -92,10 +94,15 @@ def handle_google_assistant_request():
 
     elif action == 'greet_user':
         result = get_greetings(body.get('originalRequest', {}))
+        result['data']['google']['info'] = json.dumps(body)
         return jsonify(result)
 
     elif action == 'rename_issue':
         result = rename_issue(body['result']['contexts'])
+        return jsonify(result)
+
+    elif action == 'redescribe_issue':
+        result = redescribe_issue(body['result']['contexts'])
         return jsonify(result)
 
     elif action == 'prioritize_issue':
