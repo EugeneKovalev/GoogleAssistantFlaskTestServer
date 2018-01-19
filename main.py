@@ -4,7 +4,7 @@ import uuid
 import requests
 from flask import Flask, request, jsonify, session, redirect
 
-from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue
+from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue, send_issue
 
 app = Flask(__name__)
 
@@ -108,6 +108,10 @@ def handle_google_assistant_request():
 
     elif action == 'prioritize_issue':
         result = prioritize_issue(body['result']['contexts'])
+        return jsonify(result)
+
+    elif action == 'approve_issue_sending':
+        result = send_issue(body['result']['contexts'])
         return jsonify(result)
 
 

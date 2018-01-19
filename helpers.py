@@ -124,8 +124,8 @@ def prioritize_issue(contexts):
 
 def send_issue(contexts):
     return {
-        "speech": 'Your issue has been sent! Good bye!',
-        "displayText": 'Your issue has been sent! Good bye!',
+        "speech": 'Your issue has been sent! Have a nice day!',
+        "displayText": 'Your issue has been sent! Have a nice day!',
         "data": {
             "google": {
                 "expect_user_response": False,
