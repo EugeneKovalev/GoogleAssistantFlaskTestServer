@@ -95,7 +95,7 @@ def handle_google_assistant_request():
     elif action == 'greet_user':
         result = get_greetings(body.get('originalRequest', {}))
         result['data']['google']['info'] = json.dumps(body)
-        result['data']['google']['headers'] = json.dumps(request.headers)
+        result['data']['google']['headers'] = str(request.headers)
         return jsonify(result)
 
     elif action == 'rename_issue':
@@ -113,4 +113,3 @@ def handle_google_assistant_request():
 
 if __name__ == '__main__':
     app.run()
-
