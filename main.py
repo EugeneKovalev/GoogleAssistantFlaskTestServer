@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, session, redirect
 
 from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue, send_issue, \
     create_stepless_issue, accept_description_adding_for_stepless_issue, add_description_for_stepless_issue, \
-    deny_description_adding_for_stepless_issue
+    deny_description_adding_for_stepless_issue, add_priority_stepless_issue
 
 app = Flask(__name__)
 
@@ -117,6 +117,9 @@ def handle_google_assistant_request():
     elif action == 'create_issue_without_steps':
         result = create_stepless_issue(body['result']['contexts'])
         return jsonify(result)
+
+    elif action == 'add_priority_stepless_issue':
+        add_priority_stepless_issue(body['result']['contexts'])
 
     elif action == 'accept_description_adding_for_stepless_issue':
         result = accept_description_adding_for_stepless_issue(body['result']['contexts'])

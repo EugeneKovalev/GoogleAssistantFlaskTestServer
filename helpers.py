@@ -134,10 +134,16 @@ def create_stepless_issue(contexts):
 
     # required name
 
-    # required priority
+    if not issue_context['parameters'].get('issue_priority'):
+        response_text = "Set an issue priority! Available options are blocker, critical, major, minor or trivial"
+        contexts = [
+            {
+                "name": "context-of-wait-for-priority-stepless-issue",
+                "lifespan": 1
+            }
+        ]
 
-
-    if not issue_context['parameters'].get('issue_description'):
+    elif not issue_context['parameters'].get('issue_description'):
         response_text = "Would you like to add a description?"
         contexts = [
             {
@@ -161,6 +167,23 @@ def create_stepless_issue(contexts):
             "contextOut": contexts,
             "source": "testserver"
         }
+
+
+def add_priority_stepless_issue(contexts):
+    issue_context = [_ for _ in contexts if _['name'] == 'context-of-stepless-issue'][0]
+
+    response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
+        issue_context['parameters']['issue_priority'],
+        issue_context['parameters']['issue_name'],
+        issue_context['parameters']['issue_description']
+    )
+
+    return {
+        "speech": response_text,
+        "displayText": response_text,
+        "data": {},
+        "source": "testserver"
+    }
 
 
 def accept_description_adding_for_stepless_issue(contexts):
