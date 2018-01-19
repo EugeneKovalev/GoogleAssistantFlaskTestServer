@@ -28,8 +28,8 @@ def get_permissions():
 
 def get_greetings(original_request):
     return {
-        'displayText': 'qwert',
-        'speech': 'qwertyt'
+        'displayText': 'Permissions check has temporarily been disabled. How can I help you?',
+        'speech': 'Permissions check has temporarily been disabled. How can I help you?'
     }
     if original_request.get('data', {}).get('user', {}).get('profile'):
         response_text = 'Yay! Welcome, sir!'
@@ -108,20 +108,6 @@ def prioritize_issue(contexts):
         "speech": response_text,
         "displayText": response_text,
         "data": {},
-        # "contextOut": [
-        #     {
-        #         "name": "context-of-no-issues",
-        #         "lifespan": 5
-        #     },
-        #     {
-        #         "name": "context-of-named-issue",
-        #         "lifespan": 0
-        #     },
-        #     {
-        #         "name": "context-of-described-issue",
-        #         "lifespan": 0
-        #     }
-        # ],
         "source": "testserver"
     }
 
@@ -153,3 +139,6 @@ def send_issue(contexts):
         # ],
         "source": "testserver"
     }
+
+
+
