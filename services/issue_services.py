@@ -46,7 +46,7 @@ def _invoke_priority_setting():
 
 
 def create_issue(contexts):
-    issue_context = [_ for _ in contexts if _['name'] == 'context-of-stepless-issue'][0]
+    issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
     if not issue_context['parameters'].get('issue_name'):
         return _invoke_name_setting()
