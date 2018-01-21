@@ -64,6 +64,12 @@ def create_issue(contexts):
         return {
             "speech": response_text,
             "displayText": response_text,
+            "contextOut": [
+                {
+                    "name": "issue-sending",
+                    "lifespan": 1
+                }
+            ],
             "source": "testserver"
         }
 
