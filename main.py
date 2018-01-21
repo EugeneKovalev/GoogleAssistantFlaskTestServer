@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, session, redirect
 from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue, send_issue, \
     create_stepless_issue, accept_description_adding_for_stepless_issue, add_description_for_stepless_issue, \
     deny_description_adding_for_stepless_issue, add_priority_stepless_issue
+from services.issue_services import create_issue
 
 app = Flask(__name__)
 
@@ -65,75 +66,77 @@ def handle_google_assistant_request():
     if action == 'get_permissions':
         return jsonify(get_permissions())
 
-        # return jsonify({
-        #     'displayText': "Hello! This",
-        #     'speech': "Hello! This is th",
-        #     'data': {
-        #         "google": {
-        #             "conversationToken": "{\"state\":null,\"data\":{}}",
-        #             "expectUserResponse": True,
-        #             "expectedInputs": [
-        #                 {
-        #                     "inputPrompt": {
-        #                         "initialPrompts": [
-        #                             {
-        #                                 "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
-        #                             }
-        #                         ],
-        #                         "noInputPrompts": []
-        #                     },
-        #                     "possibleIntents": [
-        #                         {
-        #                             "intent": "actions.intent.SIGN_IN",
-        #                             "inputValueData": {}
-        #                         }
-        #                     ]
-        #                 }
-        #             ]
-        #         }
-        #     }
-        # })
+    if action == 'create_issue':
+        return jsonify(create_issue(body['result']['contexts']))
 
-    elif action == 'greet_user':
-        result = get_greetings(body.get('originalRequest', {}))
-        return jsonify(result)
+    # elif action == 'greet_user':
+    #     result = get_greetings(body.get('originalRequest', {}))
+    #     return jsonify(result)
+    #
+    # elif action == 'rename_issue':
+    #     result = rename_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'redescribe_issue':
+    #     result = redescribe_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'prioritize_issue':
+    #     result = prioritize_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'approve_issue_sending':
+    #     result = send_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'create_issue_without_steps':
+    #     result = create_stepless_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'add_priority_stepless_issue':
+    #     result = add_priority_stepless_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'accept_description_adding_for_stepless_issue':
+    #     result = accept_description_adding_for_stepless_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'add_description_for_stepless_issue':
+    #     result = add_description_for_stepless_issue(body['result']['contexts'])
+    #     return jsonify(result)
+    #
+    # elif action == 'deny_description_adding_for_stepless_issue':
+    #     result = deny_description_adding_for_stepless_issue(body['result']['contexts'])
+    #     return jsonify(result)
 
-    elif action == 'rename_issue':
-        result = rename_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'redescribe_issue':
-        result = redescribe_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'prioritize_issue':
-        result = prioritize_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'approve_issue_sending':
-        result = send_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'create_issue_without_steps':
-        result = create_stepless_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'add_priority_stepless_issue':
-        result = add_priority_stepless_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'accept_description_adding_for_stepless_issue':
-        result = accept_description_adding_for_stepless_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'add_description_for_stepless_issue':
-        result = add_description_for_stepless_issue(body['result']['contexts'])
-        return jsonify(result)
-
-    elif action == 'deny_description_adding_for_stepless_issue':
-        result = deny_description_adding_for_stepless_issue(body['result']['contexts'])
-        return jsonify(result)
-
+    # return jsonify({
+    #     'displayText': "Hello! This",
+    #     'speech': "Hello! This is th",
+    #     'data': {
+    #         "google": {
+    #             "conversationToken": "{\"state\":null,\"data\":{}}",
+    #             "expectUserResponse": True,
+    #             "expectedInputs": [
+    #                 {
+    #                     "inputPrompt": {
+    #                         "initialPrompts": [
+    #                             {
+    #                                 "textToSpeech": "PLACEHOLDER_FOR_SIGN_IN"
+    #                             }
+    #                         ],
+    #                         "noInputPrompts": []
+    #                     },
+    #                     "possibleIntents": [
+    #                         {
+    #                             "intent": "actions.intent.SIGN_IN",
+    #                             "inputValueData": {}
+    #                         }
+    #                     ]
+    #                 }
+    #             ]
+    #         }
+    #     }
+    # })
 
 if __name__ == '__main__':
     app.run()
