@@ -66,12 +66,14 @@ def handle_google_assistant_request():
     if action == 'get_permissions':
         return jsonify(get_permissions())
 
+    if action == 'greet_user':
+        result = get_greetings(body.get('originalRequest', {}))
+        return jsonify(result)
+
     if action == 'create_issue':
         return jsonify(create_issue(body['result']['contexts']))
 
-    # elif action == 'greet_user':
-    #     result = get_greetings(body.get('originalRequest', {}))
-    #     return jsonify(result)
+
     #
     # elif action == 'rename_issue':
     #     result = rename_issue(body['result']['contexts'])
