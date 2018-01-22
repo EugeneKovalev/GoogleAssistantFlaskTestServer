@@ -99,7 +99,7 @@ def redescribe_issue():
 
 
 def reprioritize_issue():
-    result = _invoke_description_setting()
+    result = _invoke_priority_setting()
 
     result['contextOut'].extend([
         {"name": "issue-naming", "lifespan": 0},

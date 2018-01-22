@@ -79,7 +79,7 @@ def handle_google_assistant_request():
 
     if action == 'reprioritize_issue':
         return jsonify(reprioritize_issue())
-    
+
     # return jsonify({
     #     'displayText': "Hello! This",
     #     'speech': "Hello! This is th",
