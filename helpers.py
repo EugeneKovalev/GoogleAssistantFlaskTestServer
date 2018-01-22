@@ -27,26 +27,30 @@ def get_permissions():
 
 
 def get_greetings(original_request):
-    if original_request.get('data', {}).get('user', {}).get('profile'):
-        response_text = 'Yay! Welcome, sir! How can I help you?'
-        return {
-            'displayText': response_text,
-            'speech': response_text
-        }
-    else:
-        response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
-
-        return {
-            'displayText': response_text,
-            'speech': response_text,
-            "data": {
-                "google": {
-                    "expect_user_response": False,
-                    "is_ssml": False,
-                    "no_input_prompts": []
-                }
-            }
-        }
+    return {
+        'displayText': 'Permissions check has temporarily been disabled. How can I help you?',
+        'speech': 'Permissions check has temporarily been disabled. How can I help you?'
+    }
+    # if original_request.get('data', {}).get('user', {}).get('profile'):
+    #     response_text = 'Yay! Welcome, sir! How can I help you?'
+    #     return {
+    #         'displayText': response_text,
+    #         'speech': response_text
+    #     }
+    # else:
+    #     response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
+    #
+    #     return {
+    #         'displayText': response_text,
+    #         'speech': response_text,
+    #         "data": {
+    #             "google": {
+    #                 "expect_user_response": False,
+    #                 "is_ssml": False,
+    #                 "no_input_prompts": []
+    #             }
+    #         }
+    #     }
 
 
 
