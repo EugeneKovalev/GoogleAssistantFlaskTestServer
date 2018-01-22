@@ -1,7 +1,6 @@
 import json
 import uuid
 
-import requests
 from flask import Flask, request, jsonify, session, redirect
 
 from helpers import get_greetings, get_permissions

@@ -27,10 +27,6 @@ def get_permissions():
 
 
 def get_greetings(original_request):
-    return {
-        'displayText': 'Permissions check has temporarily been disabled. How can I help you?',
-        'speech': 'Permissions check has temporarily been disabled. How can I help you?'
-    }
     if original_request.get('data', {}).get('user', {}).get('profile'):
         response_text = 'Yay! Welcome, sir!'
         return {
