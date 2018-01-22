@@ -28,7 +28,7 @@ def get_permissions():
 
 def get_greetings(original_request):
     if original_request.get('data', {}).get('user', {}).get('profile'):
-        response_text = 'Yay! Welcome, sir!'
+        response_text = 'Yay! Welcome, sir! How can I help you?'
         return {
             'displayText': response_text,
             'speech': response_text
