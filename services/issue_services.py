@@ -73,28 +73,38 @@ def create_issue(contexts):
             "source": "testserver"
         }
 
-# def create_stepless_issue(contexts):
-#     issue_context = [_ for _ in contexts if _['name'] == 'context-of-stepless-issue'][0]
-#
-#     # required params name and priority
-#
-#     # required name
-#
-#     if not issue_context['parameters'].get('issue_priority'):
-#         response_text = "Set an issue priority! Available options are blocker, critical, major, minor or trivial"
-#         contexts = [
-#             {
-#                 "name": "context-of-wait-for-priority-stepless-issue",
-#                 "lifespan": 1
-#             }
-#         ]
-#
-#     elif not issue_context['parameters'].get('issue_description'):
-#         response_text = "Would you like to add a description?"
-#         contexts = [
-#             {
-#                 "name": "context-of-wait-for-description-stepless-issue",
-#                 "lifespan": 1
-#             }
-#         ]
-#
+
+def rename_issue():
+    result = _invoke_name_setting()
+
+    result['contextOut'].extend([
+        {"name": "issue-describing", "lifespan": 0},
+        {"name": "issue-prioritizing", "lifespan": 0},
+        {"name": "issue-sending", "lifespan": 0}
+    ])
+
+    return result
+
+
+def redescribe_issue():
+    result = _invoke_description_setting()
+
+    result['contextOut'].extend([
+        {"name": "issue-naming", "lifespan": 0},
+        {"name": "issue-prioritizing", "lifespan": 0},
+        {"name": "issue-sending", "lifespan": 0}
+    ])
+
+    return result
+
+
+def reprioritize_issue():
+    result = _invoke_description_setting()
+
+    result['contextOut'].extend([
+        {"name": "issue-naming", "lifespan": 0},
+        {"name": "issue-describing", "lifespan": 0},
+        {"name": "issue-sending", "lifespan": 0}
+    ])
+
+    return result

@@ -4,10 +4,8 @@ import uuid
 import requests
 from flask import Flask, request, jsonify, session, redirect
 
-from helpers import rename_issue, prioritize_issue, get_greetings, get_permissions, redescribe_issue, send_issue, \
-    create_stepless_issue, accept_description_adding_for_stepless_issue, add_description_for_stepless_issue, \
-    deny_description_adding_for_stepless_issue, add_priority_stepless_issue
-from services.issue_services import create_issue
+from helpers import get_greetings, get_permissions
+from services.issue_services import create_issue, rename_issue, redescribe_issue, reprioritize_issue
 
 app = Flask(__name__)
 
@@ -73,44 +71,15 @@ def handle_google_assistant_request():
     if action == 'create_issue':
         return jsonify(create_issue(body['result']['contexts']))
 
+    if action == 'rename_issue':
+        return jsonify(rename_issue())
 
-    #
-    # elif action == 'rename_issue':
-    #     result = rename_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'redescribe_issue':
-    #     result = redescribe_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'prioritize_issue':
-    #     result = prioritize_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'approve_issue_sending':
-    #     result = send_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'create_issue_without_steps':
-    #     result = create_stepless_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'add_priority_stepless_issue':
-    #     result = add_priority_stepless_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'accept_description_adding_for_stepless_issue':
-    #     result = accept_description_adding_for_stepless_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'add_description_for_stepless_issue':
-    #     result = add_description_for_stepless_issue(body['result']['contexts'])
-    #     return jsonify(result)
-    #
-    # elif action == 'deny_description_adding_for_stepless_issue':
-    #     result = deny_description_adding_for_stepless_issue(body['result']['contexts'])
-    #     return jsonify(result)
+    if action == 'redescribe_issue':
+        return jsonify(redescribe_issue())
 
+    if action == 'reprioritize_issue':
+        return jsonify(reprioritize_issue())
+    
     # return jsonify({
     #     'displayText': "Hello! This",
     #     'speech': "Hello! This is th",
