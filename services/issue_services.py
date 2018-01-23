@@ -43,9 +43,53 @@ def _invoke_priority_setting():
 
 
 def _invoke_dating_setting():
+    # return {
+    #     "speech": "When do you want it to be done?",
+    #     "displayText": "When do you want it to be done?",
+    #     "contextOut": [
+    #         {
+    #             "name": "issue-dating",
+    #             "lifespan": 1
+    #         }
+    #     ],
+    #     "source": "testserver"
+    # }
     return {
         "speech": "When do you want it to be done?",
         "displayText": "When do you want it to be done?",
+        "data": {
+            "google": {
+                {
+                    "conversationToken": "{\"state\":null,\"data\":{}}",
+                    "expectUserResponse": True,
+                    "expectedInputs": [
+                        {
+                            "inputPrompt": {
+                                "initialPrompts": [
+                                    {
+                                        "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
+                                    }
+                                ],
+                                "noInputPrompts": []
+                            },
+                            "possibleIntents": [
+                                {
+                                    "intent": "actions.intent.DATETIME",
+                                    "inputValueData": {
+                                        "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
+                                        "dialogSpec": {
+                                            "requestDatetimeText": "When do you want to come in?",
+                                            "requestDateText": "What is the best date to schedule your appointment?",
+                                            "requestTimeText": "What time of day works best for you?"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
         "contextOut": [
             {
                 "name": "issue-dating",
