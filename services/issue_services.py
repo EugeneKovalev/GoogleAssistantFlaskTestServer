@@ -54,29 +54,43 @@ def _invoke_dating_setting():
     #     ],
     #     "source": "testserver"
     # }
-    return {
-        # 'displayText': "Hello! profile data?",
-        'speech': "PLACEHOLDER_FOR_DATETIME",
-        'data': {
-            "google": {
-                "expectUserResponse": True,
-                "isSsml": False,
-                "noInputPrompts": [],
-                "systemIntent": {
-                    "intent": "actions.intent.DATETIME",
-                    "data": {
-                        "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
-                        # "dialogSpec": {
-                        #     "requestDatetimeText": "When do you want it to be done?",
-                        #     "requestDateText": "What is the best date to resolve the issue?",
-                        #     "requestTimeText": "What time of day works best for you?"
-                        # }
-                    }
-                }
-            }
-        }
-    }
 
+
+    # return {
+    #     # 'displayText': "Hello! profile data?",
+    #     'speech': "PLACEHOLDER_FOR_DATETIME",
+    #     'data': {
+    #         "google": {
+    #             "expectUserResponse": True,
+    #             "isSsml": False,
+    #             "noInputPrompts": [],
+    #             "systemIntent": {
+    #                 "intent": "actions.intent.DATETIME",
+    #                 "data": {
+    #                     "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
+    #                     # "dialogSpec": {
+    #                     #     "requestDatetimeText": "When do you want it to be done?",
+    #                     #     "requestDateText": "What is the best date to resolve the issue?",
+    #                     #     "requestTimeText": "What time of day works best for you?"
+    #                     # }
+    #                 }
+    #             }
+    #         }
+    #     }
+    # }
+
+    return {'speech': 'PLACEHOLDER_FOR_SIGN_IN',
+    'data': {
+      'google': {
+        'expectUserResponse': True,
+        'isSsml': False,
+        'noInputPrompts': [],
+        'systemIntent': {
+          'intent': 'actions.intent.SIGN_IN',
+          'data': {}
+        }
+      }
+    }}
 
 
 
