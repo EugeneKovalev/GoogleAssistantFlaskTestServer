@@ -55,34 +55,63 @@ def _invoke_dating_setting():
     #     "source": "testserver"
     # }
     return {
-                "conversationToken": "{\"state\":null,\"data\":{}}",
+        # 'displayText': "Hello! profile data?",
+        # 'speech': "Hello! profile data?",
+        'data': {
+            "google": {
                 "expectUserResponse": True,
-                "expectedInputs": [
-                    {
-                        "inputPrompt": {
-                            "initialPrompts": [
-                                {
-                                    "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
-                                }
-                            ],
-                            "noInputPrompts": []
-                        },
-                        "possibleIntents": [
-                            {
-                                "intent": "actions.intent.DATETIME",
-                                "inputValueData": {
-                                    "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
-                                    "dialogSpec": {
-                                        "requestDatetimeText": "When do you want to come in?",
-                                        "requestDateText": "What is the best date to schedule your appointment?",
-                                        "requestTimeText": "What time of day works best for you?"
-                                    }
-                                }
-                            }
-                        ]
+                "isSsml": False,
+                "noInputPrompts": [],
+                "systemIntent": {
+                    "intent": "actions.intent.DATETIME",
+                    "data": {
+                        "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
+                        "dialogSpec": {
+                            "requestDatetimeText": "When do you want to come in?",
+                            "requestDateText": "What is the best date to schedule your appointment?",
+                            "requestTimeText": "What time of day works best for you?"
+                        }
                     }
-                ]
+                }
             }
+        }
+    }
+
+
+
+
+
+
+
+        # {
+        #
+        #         "expectUserResponse": True,
+        #         "expectedInputs": [
+        #             {
+        #                 "inputPrompt": {
+        #                     "initialPrompts": [
+        #                         {
+        #                             "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
+        #                         }
+        #                     ],
+        #                     "noInputPrompts": []
+        #                 },
+        #                 "possibleIntents": [
+        #                     {
+        #                         "intent": "actions.intent.DATETIME",
+        #                         "inputValueData": {
+        #                             "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
+        #                             "dialogSpec": {
+        #                                 "requestDatetimeText": "When do you want to come in?",
+        #                                 "requestDateText": "What is the best date to schedule your appointment?",
+        #                                 "requestTimeText": "What time of day works best for you?"
+        #                             }
+        #                         }
+        #                     }
+        #                 ]
+        #             }
+        #         ]
+        #     }
 
 
 
