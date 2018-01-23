@@ -72,10 +72,15 @@ def create_issue(contexts):
         return _invoke_dating_setting()
 
     else:
-        response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
+        response_text = """
+        The name of the {0} issue is {1}. 
+        Described as {2}. 
+        Expiration date set to {3}
+        Do you want to send it?""".format(
             issue_context['parameters']['issue_priority'],
             issue_context['parameters']['issue_name'],
-            issue_context['parameters']['issue_description']
+            issue_context['parameters']['issue_description'],
+            issue_context['parameters']['issue_expiration_date']
         )
 
         return {
