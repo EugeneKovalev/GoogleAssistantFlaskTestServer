@@ -61,14 +61,19 @@ def _invoke_dating_setting():
             "google": {
                 "expectUserResponse": True,
                 "isSsml": False,
-                "noInputPrompts": [],
+                "noInputPrompts": [
+                    {
+                        "textToSpeech": "Lollypop",
+                        "displayText": "Lollypop"
+                    }
+                ],
                 "systemIntent": {
                     "intent": "actions.intent.DATETIME",
                     "data": {
                         "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
                         "dialogSpec": {
-                            "requestDatetimeText": "When do you want to come in?",
-                            "requestDateText": "What is the best date to schedule your appointment?",
+                            "requestDatetimeText": "When do you want it to be done?",
+                            "requestDateText": "What is the best date to resolve the issue?",
                             "requestTimeText": "What time of day works best for you?"
                         }
                     }
