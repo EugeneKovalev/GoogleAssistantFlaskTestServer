@@ -42,17 +42,34 @@ def _invoke_priority_setting():
     }
 
 
+def _invoke_dating_setting():
+    return {
+        "speech": "When do you want it to be done?",
+        "displayText": "When do you want it to be done?",
+        "contextOut": [
+            {
+                "name": "issue-dating",
+                "lifespan": 1
+            }
+        ],
+        "source": "testserver"
+    }
+
+
 def create_issue(contexts):
     issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
     if not issue_context['parameters'].get('issue_name'):
         return _invoke_name_setting()
 
-    if not issue_context['parameters'].get('issue_description'):
+    elif not issue_context['parameters'].get('issue_description'):
         return _invoke_description_setting()
 
-    if not issue_context['parameters'].get('issue_priority'):
+    elif not issue_context['parameters'].get('issue_priority'):
         return _invoke_priority_setting()
+
+    elif not issue_context['parameters'].get('issue_expiration_date'):
+        return _invoke_dating_setting()
 
     else:
         response_text = "The name of the {0} issue is {1}. Described as {2}. Do you want to send it?".format(
@@ -80,6 +97,7 @@ def rename_issue():
     result['contextOut'].extend([
         {"name": "issue-describing", "lifespan": 0},
         {"name": "issue-prioritizing", "lifespan": 0},
+        {"name": "issue-dating", "lifespan": 0},
         {"name": "issue-sending", "lifespan": 0}
     ])
 
@@ -92,6 +110,7 @@ def redescribe_issue():
     result['contextOut'].extend([
         {"name": "issue-naming", "lifespan": 0},
         {"name": "issue-prioritizing", "lifespan": 0},
+        {"name": "issue-dating", "lifespan": 0},
         {"name": "issue-sending", "lifespan": 0}
     ])
 
@@ -104,6 +123,20 @@ def reprioritize_issue():
     result['contextOut'].extend([
         {"name": "issue-naming", "lifespan": 0},
         {"name": "issue-describing", "lifespan": 0},
+        {"name": "issue-dating", "lifespan": 0},
+        {"name": "issue-sending", "lifespan": 0}
+    ])
+
+    return result
+
+
+def redate_issue():
+    result = _invoke_dating_setting()
+
+    result['contextOut'].extend([
+        {"name": "issue-naming", "lifespan": 0},
+        {"name": "issue-describing", "lifespan": 0},
+        {"name": "issue-prioritizing", "lifespan": 0},
         {"name": "issue-sending", "lifespan": 0}
     ])
 
