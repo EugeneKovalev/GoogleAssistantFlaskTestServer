@@ -55,10 +55,6 @@ def _invoke_dating_setting():
     #     "source": "testserver"
     # }
     return {
-        # "speech": "When do you want it to be done?",
-        # "displayText": "When do you want it to be done?",
-        "data": {
-            "google": {
                 "conversationToken": "{\"state\":null,\"data\":{}}",
                 "expectUserResponse": True,
                 "expectedInputs": [
@@ -87,15 +83,7 @@ def _invoke_dating_setting():
                     }
                 ]
             }
-        },
-        "contextOut": [
-            {
-                "name": "issue-dating",
-                "lifespan": 1
-            }
-        ],
-        "source": "testserver"
-    }
+
 
 
 def create_issue(contexts):
