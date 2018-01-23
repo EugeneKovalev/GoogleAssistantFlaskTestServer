@@ -62,9 +62,8 @@ def _invoke_dating_setting():
                 "expectUserResponse": True,
                 "isSsml": False,
                 "noInputPrompts": [
-                    {
-                        "textToSpeech": "Lollypop",
-                        "displayText": "Lollypop"
+                        {
+                            "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
                     }
                 ],
                 "systemIntent": {
