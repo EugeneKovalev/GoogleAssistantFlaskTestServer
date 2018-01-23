@@ -55,8 +55,8 @@ def _invoke_dating_setting():
     #     "source": "testserver"
     # }
     return {
-        "speech": "When do you want it to be done?",
-        "displayText": "When do you want it to be done?",
+        # "speech": "When do you want it to be done?",
+        # "displayText": "When do you want it to be done?",
         "data": {
             "google": {
                 "conversationToken": "{\"state\":null,\"data\":{}}",
