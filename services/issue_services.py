@@ -56,16 +56,12 @@ def _invoke_dating_setting():
     # }
     return {
         # 'displayText': "Hello! profile data?",
-        # 'speech': "Hello! profile data?",
+        'speech': "PLACEHOLDER_FOR_DATETIME",
         'data': {
             "google": {
                 "expectUserResponse": True,
                 "isSsml": False,
-                "noInputPrompts": [
-                        {
-                            "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
-                    }
-                ],
+                "noInputPrompts": [],
                 "systemIntent": {
                     "intent": "actions.intent.DATETIME",
                     "data": {
