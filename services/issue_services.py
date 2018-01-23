@@ -43,17 +43,17 @@ def _invoke_priority_setting():
 
 
 def _invoke_dating_setting():
-    # return {
-    #     "speech": "When do you want it to be done?",
-    #     "displayText": "When do you want it to be done?",
-    #     "contextOut": [
-    #         {
-    #             "name": "issue-dating",
-    #             "lifespan": 1
-    #         }
-    #     ],
-    #     "source": "testserver"
-    # }
+    return {
+        "speech": "When do you want it to be done?",
+        "displayText": "When do you want it to be done?",
+        "contextOut": [
+            {
+                "name": "issue-dating",
+                "lifespan": 1
+            }
+        ],
+        "source": "testserver"
+    }
 
 
     # return {
@@ -79,18 +79,21 @@ def _invoke_dating_setting():
     #     }
     # }
 
-    return {'speech': 'PLACEHOLDER_FOR_SIGN_IN',
-    'data': {
-      'google': {
-        'expectUserResponse': True,
-        'isSsml': False,
-        'noInputPrompts': [],
-        'systemIntent': {
-          'intent': 'actions.intent.SIGN_IN',
-          'data': {}
-        }
-      }
-    }}
+
+
+
+    # return {'speech': 'PLACEHOLDER_FOR_SIGN_IN',
+    # 'data': {
+    #   'google': {
+    #     'expectUserResponse': True,
+    #     'isSsml': False,
+    #     'noInputPrompts': [],
+    #     'systemIntent': {
+    #       'intent': 'actions.intent.SIGN_IN',
+    #       'data': {}
+    #     }
+    #   }
+    # }}
 
 
 
@@ -141,19 +144,25 @@ def create_issue(contexts):
     elif not issue_context['parameters'].get('issue_priority'):
         return _invoke_priority_setting()
 
-    elif not issue_context['parameters'].get('issue_expiration_date'):
+    elif not issue_context['parameters'].get('issue_date') \
+            or not issue_context['parameters'].get('issue_time')\
+            or not issue_context['parameters'].get('issue_date_period') \
+            or not issue_context['parameters'].get('issue_date'):
         return _invoke_dating_setting()
 
     else:
         response_text = """
         The name of the {0} issue is {1}. 
         Described as {2}. 
-        Expiration date set to {3}
+        Expiration date set to {3} {4} {5} {6}
         Do you want to send it?""".format(
             issue_context['parameters']['issue_priority'],
             issue_context['parameters']['issue_name'],
             issue_context['parameters']['issue_description'],
-            issue_context['parameters']['issue_expiration_date']
+            issue_context['parameters'].get('issue_date', ''),
+            issue_context['parameters'].get('issue_time', ''),
+            issue_context['parameters'].get('issue_time_period', ''),
+            issue_context['parameters'].get('issue_date_period', ''),
         )
 
         return {
