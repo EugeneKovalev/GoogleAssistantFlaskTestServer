@@ -145,9 +145,9 @@ def create_issue(contexts):
         return _invoke_priority_setting()
 
     elif not issue_context['parameters'].get('issue_date') \
-            or not issue_context['parameters'].get('issue_time')\
-            or not issue_context['parameters'].get('issue_date_period') \
-            or not issue_context['parameters'].get('issue_date'):
+            and not issue_context['parameters'].get('issue_time')\
+            and not issue_context['parameters'].get('issue_date_period') \
+            and not issue_context['parameters'].get('issue_date'):
         return _invoke_dating_setting()
 
     else:
