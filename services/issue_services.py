@@ -56,82 +56,6 @@ def _invoke_dating_setting():
     }
 
 
-    # return {
-    #     # 'displayText': "Hello! profile data?",
-    #     'speech': "PLACEHOLDER_FOR_DATETIME",
-    #     'data': {
-    #         "google": {
-    #             "expectUserResponse": True,
-    #             "isSsml": False,
-    #             "noInputPrompts": [],
-    #             "systemIntent": {
-    #                 "intent": "actions.intent.DATETIME",
-    #                 "data": {
-    #                     "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
-    #                     # "dialogSpec": {
-    #                     #     "requestDatetimeText": "When do you want it to be done?",
-    #                     #     "requestDateText": "What is the best date to resolve the issue?",
-    #                     #     "requestTimeText": "What time of day works best for you?"
-    #                     # }
-    #                 }
-    #             }
-    #         }
-    #     }
-    # }
-
-
-
-
-    # return {'speech': 'PLACEHOLDER_FOR_SIGN_IN',
-    # 'data': {
-    #   'google': {
-    #     'expectUserResponse': True,
-    #     'isSsml': False,
-    #     'noInputPrompts': [],
-    #     'systemIntent': {
-    #       'intent': 'actions.intent.SIGN_IN',
-    #       'data': {}
-    #     }
-    #   }
-    # }}
-
-
-
-
-
-
-        # {
-        #
-        #         "expectUserResponse": True,
-        #         "expectedInputs": [
-        #             {
-        #                 "inputPrompt": {
-        #                     "initialPrompts": [
-        #                         {
-        #                             "textToSpeech": "PLACEHOLDER_FOR_DATETIME"
-        #                         }
-        #                     ],
-        #                     "noInputPrompts": []
-        #                 },
-        #                 "possibleIntents": [
-        #                     {
-        #                         "intent": "actions.intent.DATETIME",
-        #                         "inputValueData": {
-        #                             "@type": "type.googleapis.com/google.actions.v2.DateTimeValueSpec",
-        #                             "dialogSpec": {
-        #                                 "requestDatetimeText": "When do you want to come in?",
-        #                                 "requestDateText": "What is the best date to schedule your appointment?",
-        #                                 "requestTimeText": "What time of day works best for you?"
-        #                             }
-        #                         }
-        #                     }
-        #                 ]
-        #             }
-        #         ]
-        #     }
-
-
-
 def create_issue(contexts):
     issue_context = [_ for _ in contexts if _['name'] == 'context-of-issue'][0]
 
@@ -151,19 +75,37 @@ def create_issue(contexts):
         return _invoke_dating_setting()
 
     else:
-        response_text = """
-        The name of the {0} issue is {1}. 
-        Described as {2}. 
-        Expiration date set to {3} {4} {5} {6}
-        Do you want to send it?""".format(
-            issue_context['parameters']['issue_priority'],
-            issue_context['parameters']['issue_name'],
-            issue_context['parameters']['issue_description'],
-            issue_context['parameters'].get('issue_date', ''),
-            issue_context['parameters'].get('issue_time', ''),
-            issue_context['parameters'].get('issue_time_period', ''),
-            issue_context['parameters'].get('issue_date_period', ''),
-        )
+        text_components = [
+            'The name of the {0} issue is {1}.'.format(
+                issue_context['parameters']['issue_priority'],
+                issue_context['parameters']['issue_name']
+            )
+        ]
+
+        if issue_context['parameters'].get('issue_description'):
+            text_components.append('Described as {0}'.format(
+                issue_context['parameters']['issue_description']
+            ))
+
+        if issue_context['parameters'].get('issue_date'):
+            text_components.append('Execution date is {0}'.format(
+                issue_context['parameters']['issue_date']
+            ))
+        elif issue_context['parameters'].get('issue_date_period'):
+            text_components.append('Execution date period is {0}'.format(
+                issue_context['parameters']['issue_date_period']
+            ))
+
+        if issue_context['parameters'].get('issue_time'):
+            text_components.append('Execution time is {0}'.format(
+                issue_context['parameters']['issue_date']
+            ))
+        elif issue_context['parameters'].get('issue_time_period'):
+            text_components.append('Execution time period is {0}'.format(
+                issue_context['parameters']['issue_date_period']
+            ))
+
+        response_text = '\n'.join(text_components)
 
         return {
             "speech": response_text,
