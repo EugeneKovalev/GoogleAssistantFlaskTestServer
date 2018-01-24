@@ -27,13 +27,11 @@ def get_permissions():
 
 
 def get_greetings(original_request):
-    # return {
-    #     'displayText': 'Permissions check has temporarily been disabled. How can I help you?',
-    #     'speech': 'Permissions check has temporarily been disabled. How can I help you?'
-    # }
     if original_request.get('data', {}).get('user', {}).get('profile'):
         print(original_request.get('data', {}).get('user', {}).get('profile'))
-        response_text = 'Yay! Welcome, sir! How can I help you?'
+        response_text = 'Yay! Welcome, {0}! How can I help you?'.format(
+            original_request['data']['user']['profile']['displayName']
+        )
         return {
             'displayText': response_text,
             'speech': response_text
@@ -45,7 +43,7 @@ def get_greetings(original_request):
             'displayText': response_text,
             'speech': response_text
         }
-        
+
         # response_text = 'You denied to provide access to your data. Terminating processes. Good bye.'
         #
         # return {

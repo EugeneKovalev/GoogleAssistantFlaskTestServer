@@ -26,16 +26,15 @@ def hello_world():
     </iframe>
     """
 
-
-@app.route('/api')
-def get_access_token():
-    state = str(uuid.uuid4())
-
-    espresso_auth_url = '{0}?client_id={1}&redirect_uri={2}&state={3}&response_type=token'.format(
-        ESPRESSO_AUTH_URL, GA_GOOGLE_CLIENT_ID, GA_REDIRECT_ENDPOINT, state
-    )
-
-    return redirect(espresso_auth_url)
+# @app.route('/api')
+# def get_access_token():
+#     state = str(uuid.uuid4())
+#
+#     espresso_auth_url = '{0}?client_id={1}&redirect_uri={2}&state={3}&response_type=token'.format(
+#         ESPRESSO_AUTH_URL, GA_GOOGLE_CLIENT_ID, GA_REDIRECT_ENDPOINT, state
+#     )
+#
+#     return redirect(espresso_auth_url)
 
     # response = requests.post(espresso_auth_url)
 
@@ -46,13 +45,6 @@ def get_access_token():
     # return redirect('{0}#access_token={1}&token_type=bearer&state={2}'.format(
     #     ESPRESSO_REDIRECT_ENDPOINT, access_token, state
     # ))
-
-
-    # response = requests.post(settings.TINKOFF_ENDPOINT + 'GetState', json={
-    #     'TerminalKey': settings.TINKOFF_TERMINAL_KEY,
-    #     'PaymentId': transaction_id,
-    #     'Token': hash_value,
-    # }
 
 
 @app.route('/api/handle-google-assistant-request', methods=['GET', 'POST'])
@@ -111,6 +103,7 @@ def handle_google_assistant_request():
     #     }
     # })
 
+    # ToDo: This Google feature works creepy
     # return {
     #     # 'displayText': "Hello! profile data?",
     #     'speech': "PLACEHOLDER_FOR_DATETIME",
