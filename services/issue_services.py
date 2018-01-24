@@ -98,11 +98,11 @@ def create_issue(contexts):
 
         if issue_context['parameters'].get('issue_time'):
             text_components.append('Execution time is {0}'.format(
-                issue_context['parameters']['issue_date']
+                issue_context['parameters']['issue_time']
             ))
         elif issue_context['parameters'].get('issue_time_period'):
             text_components.append('Execution time period is {0}'.format(
-                issue_context['parameters']['issue_date_period']
+                issue_context['parameters']['issue_time_period']
             ))
 
         response_text = '\n'.join(text_components)
